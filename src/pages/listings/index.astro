@@ -1,0 +1,31 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Browse Listings - ShortStay">
+  <main class="min-h-screen bg-subtle-background">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="mb-8">
+        <h1 class="font-display text-3xl sm:text-4xl font-bold text-text-primary">Available Shortlets</h1>
+        <p class="mt-2 text-text-secondary">Browse apartments and book directly</p>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <article class="bg-surface rounded-lg shadow border border-border overflow-hidden hover:shadow-md transition-shadow">
+          <a href="/listings/sample-apartment" class="block">
+            <div class="aspect-[4/3] bg-gray-200">
+              <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600" alt="Apartment living room" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-4">
+              <h3 class="text-h3 font-semibold text-text-primary line-clamp-1 mb-2">Cozy 2BR in Lekki</h3>
+              <p class="text-body-small text-text-secondary mb-3">Lekki, Lagos • 2 beds • 4 guests</p>
+              <div class="flex justify-between items-center">
+                <p class="text-body font-semibold text-text-primary">₦25,000 / night</p>
+              </div>
+            </div>
+          </a>
+        </article>
+      </div>
+    </div>
+  </main>
+</Layout>

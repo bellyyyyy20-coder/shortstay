@@ -1,0 +1,20 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Booking Confirmed - ShortStay">
+  <main class="min-h-screen bg-background flex items-center justify-center px-4">
+    <div class="max-w-md w-full text-center">
+      <div class="mb-6">
+        <div class="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <span class="text-success text-3xl">✓</span>
+        </div>
+        <h1 class="font-display text-3xl font-bold text-text-primary mb-2">Booking Confirmed!</h1>
+        <p class="text-text-secondary">Your payment was successful. Check your email for check-in instructions.</p>
+      </div>
+      <a href="/my-bookings" class="inline-block bg-primary text-primary-foreground px-6 py-3 rounded-md font-medium hover:bg-primary-hover transition-colors">
+        View My Bookings
+      </a>
+    </div>
+  </main>
+</Layout>

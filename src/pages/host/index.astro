@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Host Dashboard - ShortStay">
+  <main class="min-h-screen bg-subtle-background">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="mb-8">
+        <h1 class="font-display text-3xl sm:text-4xl font-bold text-text-primary">Host Dashboard</h1>
+        <p class="mt-2 text-text-secondary">Manage your listings and bookings</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-surface border border-border rounded-lg p-6">
+          <p class="text-text-secondary text-sm mb-2">Total Listings</p>
+          <p class="text-3xl font-semibold">1</p>
+        </div>
+        <div class="bg-surface border border-border rounded-lg p-6">
+          <p class="text-text-secondary text-sm mb-2">Upcoming Bookings</p>
+          <p class="text-3xl font-semibold">0</p>
+        </div>
+        <div class="bg-surface border border-border rounded-lg p-6">
+          <p class="text-text-secondary text-sm mb-2">Revenue</p>
+          <p class="text-3xl font-semibold">₦0</p>
+        </div>
+      </div>
+      
+      <div class="bg-surface border border-border rounded-lg p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="font-display text-xl font-semibold">Your Listings</h2>
+          <a href="/host/listings/new" class="bg-primary text-primary-foreground px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-hover transition-colors">
+            Add Listing
+          </a>
+        </div>
+        <div class="text-center py-12 text-text-secondary">
+          <p>No listings yet</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

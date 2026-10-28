@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  GUEST
+  HOST
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  EXPIRED
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+enum ApartmentStatus {
+  DRAFT
+  ACTIVE
+  INACTIVE
+}
+
+model User {
+  id            String    @id @default(uuid())
+  role          UserRole  @default(GUEST)
+  firstName     String
+  lastName      String
+  email         String    @unique
+  phoneNumber   String?
+  passwordHash  String?
+  emailVerified DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt()
+
+  apartments    Apartment[] @relation("HostApartments")
+  bookings      Booking[]   @relation("GuestBookings")
+}
+
+model Apartment {
+  id                  String          @id @default(uuid())
+  hostId              String
+  host                User            @relation("HostApartments", fields: [hostId], references: [id], onDelete: Cascade)
+  title               String
+  slug                String          @unique
+  description         String          @db.Text
+  addressLine1        String
+  addressLine2        String?
+  city                String
+  state               String?
+  country             String
+  pricePerNight       Decimal         @db.Decimal(10, 2)
+  currency            String          @default("NGN") @db.VarChar(3)
+  maxGuests           Int             @default(1)
+  bedrooms            Int             @default(0)
+  beds                Int             @default(0)
+  bathrooms           Decimal         @default(1) @db.Decimal(3, 1)
+  amenities           Json?
+  houseRules          String?         @db.Text
+  checkInInstructions String?         @db.Text
+  status              ApartmentStatus @default(DRAFT)
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt()
+
+  photos   ApartmentPhoto[]
+  bookings Booking[]
+
+  @@index([hostId])
+  @@index([city, status])
+  @@index([slug])
+}
+
+model ApartmentPhoto {
+  id          String    @id @default(uuid())
+  apartmentId String
+  apartment   Apartment @relation(fields: [apartmentId], references: [id], onDelete: Cascade)
+  url         String
+  publicId    String?
+  altText     String?
+  isCover     Boolean   @default(false)
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+
+  @@index([apartmentId])
+}
+
+model Booking {
+  id                    String        @id @default(uuid())
+  apartmentId           String
+  apartment             Apartment     @relation(fields: [apartmentId], references: [id], onDelete: Restrict)
+  guestId               String
+  guest                 User          @relation("GuestBookings", fields: [guestId], references: [id], onDelete: Restrict)
+  checkIn               DateTime      @db.Date
+  checkOut              DateTime      @db.Date
+  nights                Int
+  pricePerNightSnapshot Decimal       @db.Decimal(10, 2)
+  totalPrice            Decimal       @db.Decimal(10, 2)
+  currency              String        @db.VarChar(3)
+  guestCount            Int           @default(1)
+  guestFirstName        String
+  guestLastName         String
+  guestEmail            String
+  guestPhone            String?
+  status                BookingStatus @default(PENDING)
+  holdExpiresAt         DateTime?
+  confirmationCode      String?       @unique
+  cancelledAt           DateTime?
+  cancelledBy           String?
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt()
+
+  payment Payment?
+
+  @@index([apartmentId, checkIn, checkOut])
+  @@index([guestId])
+  @@index([status, holdExpiresAt])
+}
+
+model Payment {
+  id                    String        @id @default(uuid())
+  bookingId             String        @unique
+  booking               Booking       @relation(fields: [bookingId], references: [id], onDelete: Restrict)
+  provider              String        @default("stripe")
+  providerSessionId     String?       @unique
+  providerPaymentIntentId String?      @unique
+  amount                Decimal       @db.Decimal(10, 2)
+  currency              String        @db.VarChar(3)
+  status                PaymentStatus @default(PENDING)
+  receiptUrl            String?
+  failureReason         String?
+  paidAt                DateTime?
+  rawWebhookData        Json?
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt()
+
+  @@index([providerSessionId])
+  @@index([providerPaymentIntentId])
+}

@@ -1,0 +1,63 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Cozy 2BR in Lekki - ShortStay">
+  <main class="min-h-screen bg-background">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 space-y-6">
+          <div>
+            <h1 class="font-display text-3xl sm:text-4xl font-bold text-text-primary">Cozy 2BR in Lekki</h1>
+            <p class="mt-2 text-text-secondary">Lekki, Lagos</p>
+          </div>
+          
+          <div class="aspect-[16/9] rounded-lg overflow-hidden bg-gray-200">
+            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1200&h=675" alt="Apartment" class="w-full h-full object-cover" />
+          </div>
+          
+          <section>
+            <h2 class="font-display text-2xl font-semibold mb-4">About this place</h2>
+            <p class="text-text-secondary leading-relaxed">Beautiful apartment in the heart of Lekki with modern amenities, great location, and comfortable living spaces perfect for short stays.</p>
+          </section>
+          
+          <section class="bg-surface border border-border rounded-lg p-6">
+            <h2 class="font-display text-2xl font-semibold mb-4">House Rules</h2>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-2">
+                <span class="text-primary mt-1">✓</span>
+                <span class="text-text-secondary">No smoking</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-primary mt-1">✓</span>
+                <span class="text-text-secondary">No pets</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-primary mt-1">✓</span>
+                <span class="text-text-secondary">Quiet hours after 10 PM</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-primary mt-1">✓</span>
+                <span class="text-text-secondary">Check-in: 2 PM, Check-out: 11 AM</span>
+              </li>
+            </ul>
+          </section>
+        </div>
+        
+        <div class="lg:col-span-1">
+          <div class="bg-surface border border-border rounded-lg p-6 shadow-sm sticky top-6">
+            <div class="mb-4">
+              <span class="text-2xl font-semibold">₦25,000</span>
+              <span class="text-text-secondary"> / night</span>
+            </div>
+            <p class="text-sm text-text-secondary mb-4">Select dates to book</p>
+            <button class="w-full bg-primary text-primary-foreground py-3 rounded-md font-medium hover:bg-primary-hover transition-colors">
+              Book
+            </button>
+            <p class="text-xs text-text-secondary text-center mt-3">You won't be charged yet</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

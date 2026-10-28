@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Host Calendar - ShortStay">
+  <main class="min-h-screen bg-subtle-background">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="mb-8">
+        <h1 class="font-display text-3xl sm:text-4xl font-bold text-text-primary">Calendar</h1>
+        <p class="mt-2 text-text-secondary">View booked and held dates</p>
+      </div>
+      
+      <div class="bg-surface border border-border rounded-lg p-6">
+        <div id="calendar"></div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  import { Calendar } from '@fullcalendar/core';
+  import dayGridPlugin from '@fullcalendar/daygrid';
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    const calendarEl = document.getElementById('calendar');
+    if (calendarEl) {
+      const calendar = new Calendar(calendarEl, {
+        plugins: [dayGridPlugin],
+        initialView: 'dayGridMonth',
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,dayGridWeek'
+        },
+        events: [
+          {
+            title: 'Confirmed Booking',
+            start: '2026-10-28',
+            end: '2026-10-30',
+            backgroundColor: '#22C55E',
+            borderColor: '#22C55E'
+          }
+        ]
+      });
+      calendar.render();
+    }
+  });
+</script>
